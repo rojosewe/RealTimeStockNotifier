@@ -11,5 +11,5 @@ rules = RuleLoader.load()
 for symbol in rules:
     symbols.append(symbol)
 
-stocks = StockLoader(symbols)
+
         
