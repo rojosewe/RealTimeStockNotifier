@@ -1,0 +1,11 @@
+[
+ {
+	 "type":"external",
+	 "file":"rules-config/WBMD.json"
+ },
+ {
+	"type":"notification",
+	"template":"JsonToString",
+	"api-key":"o.tTMif8atPWjqVGBkcB1JUdDisHqQJwP2",
+ }
+]

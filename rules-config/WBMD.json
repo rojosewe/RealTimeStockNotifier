@@ -1,0 +1,11 @@
+[
+ {
+	"type":"threshold",
+	"symbol":"WBMD",
+	"conditions":[
+	   {"field":"currentPrice"},
+       {"op":"gt"},
+       {"value":60.00}
+	]
+ }
+]
