@@ -7,29 +7,32 @@ from rules import ThresholdGroup
 log = logging.getLogger()
 
 def load(root="rules-config/rules.json"):
+    log.info("Loading the rules from " + root)
     rules = {}
     __loadRules(root, rules)
+    log.info("Rules loaded")
     return rules
 
 def __loadRules(root, rules):
+    log.debug("Loading rules from " + root)
     with open(root, "r+") as f:
         specs = json.load(f)
         __processRules(specs, rules)
         
 def __processRules(specs, rules):
     for spec in specs:
-        log.debug("Loading threshold rules" + json.dumps(spec))
+        log.debug("Loading rules" + json.dumps(spec))
         if "type" not in spec:
             log.error("Error loading rules. No type found.")
-        if spec["type"].lower() == "external":
+        elif spec["type"].lower() == "external":
             __loadRules(spec["file"], rules)
-        if spec["type"].lower() == "threshold":
+        elif spec["type"].lower() == "threshold-group":
             symbol = spec["symbol"]
             tg = ThresholdGroup.ThresholdGroup(symbol)
-            result = tg.load(spec)
-            __addRules(rules, symbol, result)
+            tg.load(spec)
+            __addRules(rules, symbol, tg)
 
 def __addRules(rules, symbol, newRules):
     if symbol not in rules:
         rules[symbol] = []
-    symbol.append(newRules)
+    rules[symbol].append(newRules)

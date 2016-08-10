@@ -1,0 +1,6 @@
+{
+	"refresh-time": 600,
+	"service":"Yahoo",
+	"fallback-service":"Google",
+	"push-bullet-api-key": "o.tTMif8atPWjqVGBkcB1JUdDisHqQJwP2"
+}

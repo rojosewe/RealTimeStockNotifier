@@ -1,11 +1,35 @@
 [
  {
-	"type":"threshold",
+	"type":"threshold-group",
 	"symbol":"WBMD",
 	"conditions":[
-	   {"field":"currentPrice"},
-       {"op":"gt"},
-       {"value":60.00}
+	   {
+		   "field":"price", 
+		   "op":"lt",
+		   "value":53.00
+	   }
+	]
+ },
+ {
+	"type":"threshold-group",
+	"symbol":"WBMD",
+	"conditions":[
+	   {
+		   "field":"price", 
+		   "op":"gt",
+		   "value":57.00
+	   }
+	]
+ },
+ {
+	"type":"threshold-group",
+	"symbol":"WBMD",
+	"conditions":[
+	   {
+		   "field":"price", 
+		   "op":"gt",
+		   "value":59.00
+	   }
 	]
  }
 ]

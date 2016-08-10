@@ -15,7 +15,7 @@ class ThresholdGroup(RuleType):
         self.symbol = None
         self.group = []
         
-    def load(self, json, rules):
+    def load(self, json):
         self.symbol = json["symbol"]
         for cond in json["conditions"]:
             field = cond["field"]
@@ -23,10 +23,16 @@ class ThresholdGroup(RuleType):
             value = cond["value"]
             t = Threshold(self.symbol, field, operation, value)
             self.group.append(t)
-        return self.group 
+        return self.group
+     
     def check(self, stock):
-       
         for t in self.group:
-            if t.check(stock):
-                return True
-        return False
+            if not t.check(stock):
+                return False
+        return True
+    
+    def translateToHuman(self):
+        msg = ["All these thresholds have been met: \n"]
+        for t in self.group:
+            msg.append(t.translateToHuman())
+        return "\n".join(msg)

@@ -10,3 +10,6 @@ class RuleType():
     
     def check(self, stock):
         raise Exception("Unimplemented abstract method")
+    
+    def translateToHuman(self):
+        raise Exception("Unimplemented abstract method")
