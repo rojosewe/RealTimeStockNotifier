@@ -13,9 +13,12 @@ log = logging.getLogger()
 
 def getTimeSecondsUntilNextOpening():
     opening = getNextOpeningTime()
-    td = opening - datetime.datetime.now()
+    now = datetime.datetime.now()
+    td = opening - now
     if td.days > 1:
         diff = td.days * 24 * 60 * 60 + td.seconds
+    elif td.days < 0:
+        diff = 0
     else:
         diff = td.seconds
     log.info("next opening time at " + str(opening))
@@ -32,7 +35,7 @@ def getNextOpeningTime():
         if hour >= 0 and hour < 16:
             nextDay = datetime.date.today()
         elif hour >= 16 and hour < 22:
-            return 0
+            return datetime.datetime.now()
         else:
             nextDay = datetime.date.today() + datetime.timedelta(days=1)
     opening = datetime.datetime.strptime(str(nextDay) + " 16:00:00", '%Y-%m-%d %H:%M:%S')
